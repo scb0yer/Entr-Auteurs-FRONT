@@ -1,0 +1,21 @@
+.pop-up {
+  width: 100vw;
+  height: 100vh;
+  padding: 5% 20% 5% 20%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#close {
+  position: absolute;
+  top: 1vh;
+  right: 10vw;
+}
+
+@media (max-width: 800px) {
+  .pop-up {
+    padding: 5% 10% 5% 10%;
+    font-size: 16px;
+  }
+}

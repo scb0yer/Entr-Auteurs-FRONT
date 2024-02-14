@@ -1,0 +1,121 @@
+.footer {
+  width: 100vw;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  border-top: 1px rgba(255, 255, 255, 0.5) solid;
+}
+
+.container {
+  width: 90vw;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 5%;
+}
+.network {
+  height: 50px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.contact {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex: 1;
+}
+.contact > div {
+  display: flex;
+  flex-direction: column;
+}
+.contact > div:last-child {
+  padding-top: 10px;
+}
+.contact > div > label {
+  padding-right: 20px;
+}
+.contact input,
+.contact textarea {
+  width: 450px;
+}
+
+.message {
+  height: 100px;
+  vertical-align: top;
+}
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+}
+.rightColumn > div:first-child {
+  display: flex;
+  flex-direction: row;
+  gap: 25%;
+}
+.DiscordButton {
+  height: 65px;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.submit,
+button {
+  color: white;
+  border-radius: 50px;
+  text-align: center;
+  background-color: #1c2230;
+  border: 1px solid white;
+  padding: 5px;
+  width: 250px;
+  height: 25px;
+  transition: 0.5s;
+  font-size: 13px;
+  text-align: center;
+}
+.submit:hover,
+button:hover {
+  background-color: white;
+  color: #1c2230;
+}
+.réglementation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#close {
+  position: fixed;
+  right: 7vw;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+    gap: 30px;
+  }
+  .contact {
+    align-items: center;
+  }
+  .rightColumn {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .contact input,
+  .contact textarea {
+    width: 100%;
+  }
+}

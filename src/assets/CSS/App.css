@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;600&display=swap");
+
+h1 {
+  font-size: 26px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px rgba(255, 255, 255, 0.4) solid;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  padding-bottom: 20px;
+  margin: auto;
+  width: 90vw;
+}
+h3 {
+  font-size: 22px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+}
+section {
+  margin-top: 50px;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+main {
+  padding-top: 200px;
+  width: 80vw;
+  margin: auto;
+  padding-bottom: 50px;
+}
+ul {
+  padding-top: 10px;
+  line-height: 23px;
+}
+li {
+  list-style: "✒️";
+  margin-left: 50px;
+  padding-left: 10px;
+}
+strong {
+  font-weight: 600;
+}
+.books {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 40%;
+  width: 120px;
+}
+.index {
+  width: 100vw;
+}
+
+.scroll-lock {
+  overflow: hidden;
+}
+.profil-mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  gap: 50px;
+  padding-bottom: 50px;
+}
+.profil-mainContainer > div {
+  width: 400px;
+}
+.profil-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.profil-container img {
+  width: 100px;
+}
+.profil-container > div {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+  p,
+  h1,
+  h2,
+  h3,
+  body,
+  ul {
+    text-align: left;
+  }
+  p,
+  body,
+  ul {
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  h3 {
+    font-size: 14px;
+    line-height: 15px;
+  }
+  h2 {
+    font-size: 16px;
+    line-height: 17px;
+  }
+  h1 {
+    font-size: 18px;
+    line-height: 18px;
+  }
+  li {
+    list-style: "●";
+    margin-left: 20px;
+    padding-left: 5px;
+  }
+  .invisible {
+    display: none;
+  }
+}
