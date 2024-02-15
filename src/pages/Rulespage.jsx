@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function RulesPage() {
   return (
     <main>
@@ -36,12 +37,17 @@ export default function RulesPage() {
       <section>
         <h3>Concrètement, comment ça se passe ?</h3>
         <p>
+          Après avoir lu le présent règlement, il faut{" "}
+          <Link to="/inscription">s'inscrire</Link> en renseignant la clef
+          "concours"
+        </p>
+        <p>
           Chaque semaine (dimanche matin, à partir de 10h), les participants
           découvrent les deux histoires qu'ils doivent lire depuis leur espace.
         </p>
         <p>
-          Ils peuvent cliquer sur la couvberture de l'image pour être
-          directement redirigés vers le livre sur Wattpad.
+          Ils peuvent cliquer sur la couverture de l'image pour être directement
+          redirigés vers le livre sur Wattpad.
         </p>
         <p>
           Toujours depuis leur espace, ils doivent voter pour l'histoire qu'ils

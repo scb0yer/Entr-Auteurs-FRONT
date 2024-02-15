@@ -11,11 +11,13 @@ import SubscriptionPage from "./pages/SubscriptionPage";
 import ParticipantsPage from "./pages/ParticipantsPage";
 import AuthorPage from "./pages/AuthorPage";
 import Login from "./components/login";
+import Menu from "./components/Menu";
 
 function App() {
   const [legalDisplay, setLegalDisplay] = useState(false);
   const [cookiesDisplay, setCookiesDisplay] = useState(false);
   const [loginDisplay, setLoginDisplay] = useState(false);
+  const [menuDisplay, setMenuDisplay] = useState(false);
   const [token, setToken] = useState("");
 
   return (
@@ -24,6 +26,7 @@ function App() {
         legalDisplay={legalDisplay}
         cookiesDisplay={cookiesDisplay}
         loginDisplay={loginDisplay}
+        setMenuDisplay={setMenuDisplay}
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -51,6 +54,7 @@ function App() {
           token={token}
         />
       )}
+      {menuDisplay && <Menu setMenuDisplay={setMenuDisplay} />}
       <Footer
         legalDisplay={legalDisplay}
         setLegalDisplay={setLegalDisplay}

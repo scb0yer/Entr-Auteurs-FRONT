@@ -14,6 +14,7 @@ export default function SubscriptionPage(props) {
   const [story_url, setStory_url] = useState("");
   const [story_cover, setStory_cover] = useState("");
   const [password, setPassword] = useState("");
+  const [key, setKey] = useState("");
   const [adult, setAdult] = useState(false);
   const [copyrights, setCopyrights] = useState(false);
   const [engagement, setEngagement] = useState(false);
@@ -31,6 +32,8 @@ export default function SubscriptionPage(props) {
       setStory_cover(event.target.value);
     } else if (target === "password") {
       setPassword(event.target.value);
+    } else if (target === "key") {
+      setKey(event.target.value);
     }
   };
 
@@ -231,6 +234,22 @@ export default function SubscriptionPage(props) {
             commencer par https://img.wattpad.com/cover/
           </p>
           <div>
+            <label className="invisible" htmlFor="key">
+              Clé "secrète" pour s'inscrire :
+            </label>
+            <input
+              type="text"
+              id="key"
+              className="input-form"
+              name="key"
+              placeholder="Clé à retrouver dans le règlement"
+              value={key}
+              onChange={(event) => {
+                onChange(event, "key");
+              }}
+            />
+          </div>
+          <div>
             <input
               type="button"
               id="submit"
@@ -239,7 +258,9 @@ export default function SubscriptionPage(props) {
               value="S'inscrire"
               onClick={(event) => {
                 event.preventDefault();
-                SignUp();
+                key !== "concours"
+                  ? alert("Tu dois lire le règlement pour trouver la clé.")
+                  : SignUp();
               }}
             />
           </div>

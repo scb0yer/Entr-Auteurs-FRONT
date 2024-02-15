@@ -45,13 +45,13 @@ label {
   text-align: right;
 }
 
-@media (max-width: 800px) {
-  .infos > div {
+@media (max-width: 750px) {
+  .infos {
     flex-direction: column;
-    flex: 1;
+    align-items: center;
   }
-  .input-form {
-    width: 80vw;
+  .infos > div > input {
+    width: 70vw;
   }
   label {
     font-size: 14px;

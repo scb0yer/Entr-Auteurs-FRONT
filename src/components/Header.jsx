@@ -1,4 +1,5 @@
 import logo from "../assets/img/design/Entr’auteurs.png";
+import menu from "../assets/img/design/bars-solid.svg";
 import "../assets/CSS/navigation.css";
 
 import { Link } from "react-router-dom";
@@ -29,6 +30,15 @@ const Header = (props) => {
         <Link to="/profil" className="invisible">
           Profil
         </Link>
+      </div>
+      <div className="menu">
+        <img
+          src={menu}
+          alt="menu"
+          onClick={() => {
+            props.setMenuDisplay(true);
+          }}
+        />
       </div>
     </div>
   );

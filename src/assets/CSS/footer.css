@@ -113,9 +113,12 @@ button:hover {
   }
 }
 
-@media (max-width: 320px) {
-  .contact input,
-  .contact textarea {
-    width: 100%;
+@media (max-width: 750px) {
+  .footer .container .contact input,
+  .footer .container .contact textarea {
+    width: 90vw;
+  }
+  .footer .container .contact .submit {
+    width: 100px;
   }
 }

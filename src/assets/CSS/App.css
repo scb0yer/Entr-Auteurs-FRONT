@@ -49,6 +49,12 @@ li {
 strong {
   font-weight: 600;
 }
+.smallText {
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  line-height: 29px;
+  text-align: justify;
+}
 .books {
   margin-top: 50px;
   margin-bottom: 50px;
@@ -85,8 +91,47 @@ strong {
   display: flex;
   justify-content: space-between;
 }
+.smallButton {
+  width: 120px;
+}
 
-@media (max-width: 800px) {
+.smallText li {
+  list-style: "✑";
+  margin-left: 20px;
+  padding-left: 5px;
+}
+.burger-menu {
+  position: fixed;
+  top: 150px;
+  right: 0px;
+}
+.burger-menu > div {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 10px;
+  color: #1f2231;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.burger-menu > div > button {
+  height: 35px;
+}
+
+.menu-status {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+@media (min-width: 750px) {
+  .menu {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
   p,
   h1,
   h2,
