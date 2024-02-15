@@ -8,6 +8,7 @@ import ChangeStatus from "../components/ChangeStatus";
 
 export default function AuthorPage(props) {
   const navigate = useNavigate();
+  const [week, setWeek] = useState();
   const [author, setAuthor] = useState();
   const [admin, setAdmin] = useState(false);
   const [moreInfos, setMoreInfos] = useState(false);
@@ -32,7 +33,8 @@ export default function AuthorPage(props) {
             },
           }
         );
-        setAuthor(data);
+        setAuthor(data.author);
+        setWeek(data.week);
         setUpdatePending(true);
         setUpdateRegistered(true);
         setUpdateActive(true);

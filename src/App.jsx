@@ -12,6 +12,7 @@ import ParticipantsPage from "./pages/ParticipantsPage";
 import AuthorPage from "./pages/AuthorPage";
 import Login from "./components/login";
 import Menu from "./components/Menu";
+import PasswordPage from "./pages/PasswordPage";
 
 function App() {
   const [legalDisplay, setLegalDisplay] = useState(false);
@@ -30,6 +31,10 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route
+          path="/author/password"
+          element={<PasswordPage setToken={setToken} />}
+        />
         <Route path="/reglement" element={<RulesPage />} />
         <Route
           path="/inscription"
