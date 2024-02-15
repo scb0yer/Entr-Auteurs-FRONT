@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 const Login = (props) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -91,6 +92,18 @@ const Login = (props) => {
               onClick={(event) => {
                 event.preventDefault();
                 login();
+              }}
+            />
+          </div>
+          <div>
+            <input
+              type="button"
+              className="submit"
+              name="submit2"
+              value="Mot de passe oublié ?"
+              onClick={(event) => {
+                navigate("/author/password");
+                props.setLoginDisplay(false);
               }}
             />
           </div>
