@@ -11,6 +11,13 @@ export default function RulesPage() {
             histoires pouvant contenir du contenu mature.
           </li>
           <li>
+            Ce concours est réservé aux membres qui ont rejoint le{" "}
+            <a href="https://discord.gg/ukhEHygEyf">
+              serveur Discord d'Entr'Auteurs
+            </a>
+            .
+          </li>
+          <li>
             Chaque auteur ne peut inscrire qu'une seule histoire par session.
           </li>
           <li>
