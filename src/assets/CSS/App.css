@@ -74,9 +74,10 @@ strong {
   align-items: space-between;
   gap: 50px;
   padding-bottom: 50px;
+  width: 90vw;
 }
 .profil-mainContainer > div {
-  width: 400px;
+  width: 380px;
 }
 .profil-container {
   display: flex;
@@ -125,6 +126,12 @@ strong {
   gap: 5px;
 }
 
+.login-button {
+  width: 150px;
+  height: 35px;
+  font-size: 20px;
+}
+
 @media (min-width: 750px) {
   .menu {
     display: none;
@@ -166,5 +173,11 @@ strong {
   }
   .invisible {
     display: none;
+  }
+  .profil-mainContainer {
+    flex-direction: column;
+  }
+  .profil-mainContainer > div {
+    width: 80vw;
   }
 }

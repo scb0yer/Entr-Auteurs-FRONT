@@ -33,7 +33,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/author/password"
-          element={<PasswordPage setToken={setToken} />}
+          element={<PasswordPage setToken={setToken} token={token} />}
         />
         <Route path="/reglement" element={<RulesPage />} />
         <Route

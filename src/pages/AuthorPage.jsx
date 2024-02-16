@@ -49,7 +49,6 @@ export default function AuthorPage(props) {
   }, [props.token]);
 
   useEffect(() => {
-    console.log("author >>", author);
     const getAuthorsPending = async () => {
       try {
         const { data } = await axios.get(
@@ -70,7 +69,6 @@ export default function AuthorPage(props) {
   }, [updatePending]);
 
   useEffect(() => {
-    console.log("author >>", author);
     const getAuthorsRegistered = async () => {
       try {
         const { data } = await axios.get(
@@ -82,7 +80,6 @@ export default function AuthorPage(props) {
           }
         );
         setAuthorsRegistered(data);
-        console.log(data);
       } catch (error) {
         console.log(error.message);
       }
@@ -91,7 +88,6 @@ export default function AuthorPage(props) {
   }, [updateRegistered]);
 
   useEffect(() => {
-    console.log("author >>", author);
     const getAuthorsActive = async () => {
       try {
         const { data } = await axios.get(
@@ -111,7 +107,6 @@ export default function AuthorPage(props) {
   }, [updateActive]);
 
   useEffect(() => {
-    console.log("author >>", author);
     const getAuthorsInactive = async () => {
       try {
         const { data } = await axios.get(
@@ -194,7 +189,7 @@ export default function AuthorPage(props) {
       )}
       <br />
       <br />
-      <div className="profil-mainContainer">
+      <section className="profil-mainContainer">
         <div>
           <div>
             <h2>Tes informations</h2>
@@ -230,7 +225,7 @@ export default function AuthorPage(props) {
             </div>
             <button
               onClick={() => {
-                alert("Fonctionnalité en cours de création");
+                navigate("/author/password");
               }}
             >
               Modifier ton mot de passe
@@ -256,7 +251,7 @@ export default function AuthorPage(props) {
             </button>
           </div>
         </div>
-      </div>
+      </section>
       {admin && (
         <div className="admin-container">
           <h2 className="admin">ESPACE ADMINISTRATEUR</h2>
@@ -390,22 +385,25 @@ export default function AuthorPage(props) {
     </main>
   ) : (
     <main>
-      Tu dois
+      Tu dois{" "}
       <button
+        className="login-button"
         onClick={() => {
           navigate("/inscription");
         }}
       >
         t'inscrire
       </button>{" "}
-      ou
+      ou{" "}
       <button
+        className="login-button"
         onClick={() => {
           props.setLoginDisplay(true);
         }}
       >
+        {" "}
         te connecter
-      </button>
+      </button>{" "}
       pour accéder à cette page.
     </main>
   );

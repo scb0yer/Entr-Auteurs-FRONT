@@ -5,6 +5,12 @@ import "../assets/CSS/Subscription.css";
 
 export default function PasswordPage(props) {
   const [token, setToken] = useState();
+
+  useState(() => {
+    if (props.token) {
+      setToken(props.token);
+    }
+  }, []);
   const [password, setPassword] = useState();
   const onChange = (event, target) => {
     if (target === "token") {
@@ -44,11 +50,11 @@ export default function PasswordPage(props) {
   return (
     <main>
       <form>
-        <h2>Formulaire d'inscription</h2>
+        <h2>Changer son mot de passe</h2>
         <section className="infos">
           <div>
             <label className="invisible" htmlFor="token">
-              Clé reçue par email :
+              Clé secrète :
             </label>
             <input
               type="text"
@@ -62,6 +68,11 @@ export default function PasswordPage(props) {
               }}
             />
           </div>
+          <p className="smallText">
+            Si elle ne s'affiche pas automatiquement, tu peux nous la demander
+            en utilisant le formulaire de contact ou en nous envoyant un message
+            sur Discord.
+          </p>
           <div>
             <label className="invisible" htmlFor="newpassword">
               Nouveau mot de passe :
