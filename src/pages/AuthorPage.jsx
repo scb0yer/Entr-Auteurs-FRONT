@@ -8,6 +8,7 @@ import ChangeStatus from "../components/ChangeStatus";
 
 export default function AuthorPage(props) {
   const navigate = useNavigate();
+  const [isloading, setIsLoading] = useState(true);
   const [week, setWeek] = useState();
   const [author, setAuthor] = useState();
   const [admin, setAdmin] = useState(false);
@@ -39,6 +40,7 @@ export default function AuthorPage(props) {
         setUpdateRegistered(true);
         setUpdateActive(true);
         setUpdateInactive(true);
+        setIsLoading(false);
       } catch (error) {
         console.log(error.message);
       }
@@ -128,7 +130,9 @@ export default function AuthorPage(props) {
     getAuthorsInactive();
   }, [updateInactive]);
 
-  return props.token ? (
+  return props.token && isloading ? (
+    <main>Page en chargement...</main>
+  ) : author ? (
     <main>
       <p>Sur ton profil, tu as accès à toutes tes informations.</p>
       {moreInfos ? (
