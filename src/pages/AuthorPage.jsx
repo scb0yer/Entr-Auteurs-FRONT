@@ -153,7 +153,7 @@ export default function AuthorPage(props) {
             }
           );
           setWeek(week + 1);
-          setAlert(false);
+          setCareful(false);
           alert("La semaine a bien été mise à jour");
         }
       }
