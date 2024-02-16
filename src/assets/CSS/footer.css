@@ -39,6 +39,9 @@
 .contact textarea {
   width: 450px;
 }
+.contact textarea {
+  height: 150px;
+}
 
 .message {
   height: 100px;
