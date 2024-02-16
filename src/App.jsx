@@ -7,12 +7,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import RulesPage from "./pages/Rulespage";
-import SubscriptionPage from "./pages/SubscriptionPage";
+import SubscriptionPage from "./pages/UpdateStoryPage";
 import ParticipantsPage from "./pages/ParticipantsPage";
 import AuthorPage from "./pages/AuthorPage";
 import Login from "./components/login";
 import Menu from "./components/Menu";
 import PasswordPage from "./pages/PasswordPage";
+import UpdateStoryPage from "./pages/UpdateStoryPage";
 
 function App() {
   const [legalDisplay, setLegalDisplay] = useState(false);
@@ -39,6 +40,10 @@ function App() {
         <Route
           path="/inscription"
           element={<SubscriptionPage setToken={setToken} />}
+        />
+        <Route
+          path="/updateStory"
+          element={<UpdateStoryPage token={token} />}
         />
         <Route path="/participants" element={<ParticipantsPage />} />
         <Route

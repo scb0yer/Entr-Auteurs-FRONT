@@ -8,20 +8,17 @@ import ChangeStatus from "../components/ChangeStatus";
 
 export default function AuthorPage(props) {
   const navigate = useNavigate();
+  const [isActive, setIsActive] = useState(false);
+  const [stories, setStories] = useState();
   const [isloading, setIsLoading] = useState(true);
   const [week, setWeek] = useState();
   const [author, setAuthor] = useState();
   const [admin, setAdmin] = useState(false);
   const [moreInfos, setMoreInfos] = useState(false);
-  const [updatePending, setUpdatePending] = useState(false);
-  const [authorsPending, setAuthorsPending] = useState();
-  const [authorsRegistered, setAuthorsRegistered] = useState();
-  const [updateRegistered, setUpdateRegistered] = useState(false);
-  const [authorsActive, setAuthorsActive] = useState();
-  const [updateActive, setUpdateActive] = useState(false);
-  const [updateInactive, setUpdateInactive] = useState(false);
-  const [authorsInactive, setAuthorsInactive] = useState();
+  const [authors, setAuthors] = useState();
   const [changeStatusDisplay, setChangeStatusDisplay] = useState(false);
+  const [alreadyVoted, setAlreadyVoted] = useState(false);
+  const [careful, setCareful] = useState(false);
 
   useEffect(() => {
     const getAuthorData = async () => {
@@ -36,11 +33,18 @@ export default function AuthorPage(props) {
         );
         setAuthor(data.author);
         setWeek(data.week);
-        setUpdatePending(true);
-        setUpdateRegistered(true);
-        setUpdateActive(true);
-        setUpdateInactive(true);
         setIsLoading(false);
+        if (data.author.status === "Active") {
+          setIsActive(true);
+          setStories(data.stories);
+          console.log(stories);
+          if (data.author.stories_voted.length >= data.week) {
+            setAlreadyVoted(true);
+          }
+        }
+        if (data.author.account.role === "Admin") {
+          setAdmin(true);
+        }
       } catch (error) {
         console.log(error.message);
       }
@@ -49,81 +53,137 @@ export default function AuthorPage(props) {
   }, [props.token]);
 
   useEffect(() => {
-    const getAuthorsPending = async () => {
+    const getAuthors = async () => {
       try {
         const { data } = await axios.get(
-          "https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/authors/Pending",
+          "https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/authors",
           {
             headers: {
               authorization: `Bearer ${props.token}`,
             },
           }
         );
-        setAuthorsPending(data);
-        setAdmin(true);
+        setAuthors(data);
       } catch (error) {
         console.log(error.message);
       }
     };
-    getAuthorsPending();
-  }, [updatePending]);
+    getAuthors();
+  }, [admin]);
 
-  useEffect(() => {
-    const getAuthorsRegistered = async () => {
-      try {
-        const { data } = await axios.get(
-          "https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/authors/Registered",
+  const vote = async (storyId) => {
+    try {
+      if (alreadyVoted) {
+        alert("Tu as déjà voté pour cette semaine");
+      } else {
+        const { data } = await axios.post(
+          `https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/author/vote/${storyId}/${week}`,
+          {},
           {
             headers: {
               authorization: `Bearer ${props.token}`,
             },
           }
         );
-        setAuthorsRegistered(data);
-      } catch (error) {
-        console.log(error.message);
+        setAlreadyVoted(true);
+        alert("Ton vote a bien été pris en compte");
       }
-    };
-    getAuthorsRegistered();
-  }, [updateRegistered]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-  useEffect(() => {
-    const getAuthorsActive = async () => {
-      try {
-        const { data } = await axios.get(
-          "https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/authors/Active",
-          {
-            headers: {
-              authorization: `Bearer ${props.token}`,
-            },
-          }
-        );
-        setAuthorsActive(data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    getAuthorsActive();
-  }, [updateActive]);
+  const getPending = async () => {
+    try {
+      const { data } = await axios.post(
+        `https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/author/update`,
+        { status: "Pending" },
+        {
+          headers: {
+            authorization: `Bearer ${props.token}`,
+          },
+        }
+      );
+      alert("Ton statut a bien été mis à jour.");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-  useEffect(() => {
-    const getAuthorsInactive = async () => {
-      try {
-        const { data } = await axios.get(
-          "https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/authors/Inactive",
+  const newWeek = async () => {
+    try {
+      const didntVote = [];
+      if (!careful) {
+        for (let a = 0; a < authors.authors.length; a++) {
+          if (authors.authors[a].status === "Active") {
+            if (authors.authors[a].stories_voted.length < week) {
+              didntVote.push(authors.authors[a].account.username);
+            }
+          }
+        }
+        if (didntVote.length > 0) {
+          alert(
+            "Des participants n'ont pas encore voté. Es-tu sûre que la semaine est bien finie ? Si oui, reclique sur le bouton."
+          );
+          setCareful(true);
+        }
+      }
+      if (careful || didntVote.length === 0) {
+        if (week === (authors.nbActive - 1) / 2) {
+          const { data } = await axios.post(
+            `https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/endSession`,
+            {},
+            {
+              headers: {
+                authorization: `Bearer ${props.token}`,
+              },
+            }
+          );
+          setWeek(0);
+          setCareful(false);
+          alert("La session est terminée.");
+        } else {
+          const { data } = await axios.post(
+            `https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/week`,
+            {},
+            {
+              headers: {
+                authorization: `Bearer ${props.token}`,
+              },
+            }
+          );
+          setWeek(week + 1);
+          setAlert(false);
+          alert("La semaine a bien été mise à jour");
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const newSession = async () => {
+    try {
+      if (authors.nbRegistered % 2 === 0) {
+        alert("Le nombre de participants enregistrés doit être impair");
+      } else if (week > 0) {
+        alert("Une session est déjà en cours !");
+      } else {
+        const { data } = await axios.post(
+          `https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/newSession/`,
+          {},
           {
             headers: {
               authorization: `Bearer ${props.token}`,
             },
           }
         );
-        setAuthorsInactive(data);
-      } catch (error) {
-        console.log(error.message);
+        alert("La session a bien été lancée");
       }
-    };
-    getAuthorsInactive();
-  }, [updateInactive]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return props.token && isloading ? (
     <main>Page en chargement...</main>
@@ -187,7 +247,57 @@ export default function AuthorPage(props) {
           Plus d'infos
         </button>
       )}
-      <br />
+
+      {isActive && (
+        <>
+          <br />
+          <section className="activeSection">
+            <h2>Semaine {week}</h2>
+            <div className="invisible">
+              <p className="smallText">
+                Tu as jusqu'à samedi soir pour consacrer une heure de lecture à
+                chacune de ces histoires, et voter pour celle que tu préfères.
+              </p>
+              <p className="smallText">
+                Attention, une fois que tu as voté, tu ne peux plus revenir en
+                arrière.
+              </p>
+              <p className="smallText">
+                Si tu ne votes pas, tu auras une pénalité de deux points.
+              </p>
+              <p className="smallText">
+                Quand la semaine sera terminée (dimanche dans la matinée), deux
+                nouvelles histoires apparaitront.
+              </p>
+            </div>
+            <br />
+            <p>Clique sur la couverture du livre pour le lire (sur wattpad).</p>
+            <br />
+            <div className="vote">
+              {stories.map((story, index) => {
+                return (
+                  <div key={index}>
+                    <a href={story.story_url}>
+                      <img src={story.story_cover} alt={story.story_title} />
+                    </a>
+                    {!alreadyVoted && (
+                      <button
+                        onClick={() => {
+                          vote(story.story_id);
+                        }}
+                      >
+                        Voter pour {story.story_title}
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          <br />
+        </>
+      )}
       <br />
       <section className="profil-mainContainer">
         <div>
@@ -215,7 +325,7 @@ export default function AuthorPage(props) {
                   <button
                     className="smallButton"
                     onClick={() => {
-                      alert("Fonctionnalité en cours de création");
+                      getPending();
                     }}
                   >
                     Se réinscrire
@@ -244,137 +354,157 @@ export default function AuthorPage(props) {
             <button
               className="smallButton"
               onClick={() => {
-                alert("Fonctionnalité en cours de création");
+                navigate("/updateStory");
               }}
             >
-              Changer d'histoire
+              Modifier l'histoire
             </button>
           </div>
         </div>
       </section>
       {admin && (
-        <div className="admin-container">
+        <section className="admin-container">
           <h2 className="admin">ESPACE ADMINISTRATEUR</h2>
-          {authorsRegistered && (
-            <p>Inscrits à la prochaine session : {authorsRegistered.count}</p>
+          <br />
+          {week > 0 && (
+            <div className="center">
+              <button
+                className="big"
+                onClick={() => {
+                  newWeek();
+                }}
+              >
+                Nouvelle semaine
+              </button>
+              <br />
+              <br />
+            </div>
           )}
-          {authorsActive && (
-            <p>Inscrits à la session en cours : {authorsActive.count}</p>
+          {authors && (
+            <p>Inscrits à la prochaine session : {authors.nbRegistered}</p>
           )}
+          <br />
           <h3>Nouvelles inscriptions en attente :</h3>
           <div>
-            {authorsPending &&
-              authorsPending.authors.map((author, index) => {
+            {authors &&
+              authors.authors.map((author, index) => {
                 return (
-                  <div key={index}>
-                    <div>{author.account.username}</div>
-                    <div>
-                      <a href={author.story_details.story_url}>
-                        <img
-                          className="miniature"
-                          src={author.story_details.story_cover}
-                          alt={author.story_details.story_title}
-                        />
-                      </a>
+                  author.status === "Pending" && (
+                    <div key={index}>
+                      <div>{author.account.username}</div>
+                      <div>
+                        <a href={author.story_details.story_url}>
+                          <img
+                            className="miniature"
+                            src={author.story_details.story_cover}
+                            alt={author.story_details.story_title}
+                          />
+                        </a>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setChangeStatusDisplay(true);
+                        }}
+                      >
+                        {author.status}
+                      </button>
+                      <div>
+                        {changeStatusDisplay && (
+                          <ChangeStatus
+                            setChangeStatusDisplay={setChangeStatusDisplay}
+                            author={author}
+                            token={props.token}
+                          />
+                        )}
+                      </div>
                     </div>
-                    <button
-                      onClick={() => {
-                        setChangeStatusDisplay(true);
-                      }}
-                    >
-                      {author.status}
-                    </button>
-                    <div>
-                      {changeStatusDisplay && (
-                        <ChangeStatus
-                          setChangeStatusDisplay={setChangeStatusDisplay}
-                          // setUpdatePending={setUpdatePending}
-                          // updatePending={updatePending}
-                          // setUpdateRegistered={setUpdateRegistered}
-                          // updateRegistered={updateRegistered}
-                          // setUpdateInactive={setUpdateInactive}
-                          // updateInactive={updateInactive}
-                          author={author}
-                          token={props.token}
-                        />
-                      )}
-                    </div>
-                  </div>
+                  )
                 );
               })}
           </div>
 
           <h3>Inscriptions validées pour la prochaine session :</h3>
           <div>
-            {authorsRegistered &&
-              authorsRegistered.authors.map((author, index) => {
+            {authors &&
+              authors.authors.map((author, index) => {
                 return (
-                  <div key={index}>
-                    <div>{author.account.username}</div>
-                    <div>
-                      <a href={author.story_details.story_url}>
-                        <img
-                          className="miniature"
-                          src={author.story_details.story_cover}
-                          alt={author.story_details.story_title}
-                        />
-                      </a>
+                  author.status === "Registered" && (
+                    <div key={index}>
+                      <div>{author.account.username}</div>
+                      <div>
+                        <a href={author.story_details.story_url}>
+                          <img
+                            className="miniature"
+                            src={author.story_details.story_cover}
+                            alt={author.story_details.story_title}
+                          />
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                  )
                 );
               })}
           </div>
-          <div>
-            <button className="large">Lancer la session</button>
+          <div className="center">
+            <button
+              className="big"
+              onClick={() => {
+                newSession();
+              }}
+            >
+              Démarrer la session
+            </button>
           </div>
-
+          <br />
           <h3>Auteurs participants à la session actuelle :</h3>
           <div>
-            {authorsActive &&
-              authorsActive.authors.map((author, index) => {
+            {authors &&
+              authors.authors.map((author, index) => {
                 return (
-                  <div key={index}>
-                    <div>{author.account.username}</div>
-                    <div>
-                      <a href={author.story_details.story_url}>
-                        <img
-                          className="miniature"
-                          src={author.story_details.story_cover}
-                          alt={author.story_details.story_title}
-                        />
-                      </a>
+                  author.status === "Active" && (
+                    <div key={index}>
+                      <div>{author.account.username}</div>
+                      <div>
+                        <a href={author.story_details.story_url}>
+                          <img
+                            className="miniature"
+                            src={author.story_details.story_cover}
+                            alt={author.story_details.story_title}
+                          />
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                  )
                 );
               })}
-          </div>
-          <div>
-            <button className="large">Terminer la session</button>
           </div>
 
           <h3>Participants inactifs :</h3>
           <div>
-            {authorsInactive &&
-              authorsInactive.authors.map((author, index) => {
+            {authors &&
+              authors.authors.map((author, index) => {
                 return (
-                  <div key={index}>
-                    <div>{author.account.username}</div>
-                    <div>
-                      <a href={author.story_details.story_url}>
-                        <img
-                          className="miniature"
-                          src={author.story_details.story_cover}
-                          alt={author.story_details.story_title}
-                        />
-                      </a>
+                  author.status === "Inactive" && (
+                    <div key={index}>
+                      <div>{author.account.username}</div>
+                      <div>
+                        <a href={author.story_details.story_url}>
+                          <img
+                            className="miniature"
+                            src={author.story_details.story_cover}
+                            alt={author.story_details.story_title}
+                          />
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                  )
                 );
               })}
           </div>
-        </div>
+        </section>
       )}
       <button
+        className="bigButton"
         onClick={() => {
           props.setToken(null);
           navigate("/");

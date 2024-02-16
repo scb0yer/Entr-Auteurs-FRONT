@@ -4,9 +4,10 @@
   border-bottom: 1px white solid;
 }
 
-.admin-container {
+main .admin-container {
   padding-top: 30px;
   padding-bottom: 50px;
+  width: 80vw;
 }
 
 .admin-container > h3 {
@@ -31,4 +32,14 @@
 }
 .miniature {
   width: 100px;
+}
+
+.admin-container .big {
+  width: 200px;
+  font-size: 18px;
+  height: 30px;
+}
+.center {
+  display: flex;
+  justify-content: center;
 }

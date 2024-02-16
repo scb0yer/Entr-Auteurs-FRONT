@@ -23,6 +23,8 @@ h3 {
 
 body {
   font-family: "Raleway", sans-serif;
+  width: 100vw;
+  margin: auto;
   font-size: 18px;
   line-height: 22px;
 }
@@ -92,8 +94,42 @@ strong {
   display: flex;
   justify-content: space-between;
 }
+.activeSection {
+  border: 1px solid white;
+  padding: 30px;
+  width: 82vw;
+}
+.activeSection > h2 {
+  width: 70vw;
+  text-align: left;
+}
+.vote {
+  width: 70vw;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.vote > div {
+  display: flex;
+  flex-direction: column;
+}
+.vote img {
+  width: 250px;
+}
+
+.vote button {
+  margin-top: 20px;
+  height: 40px;
+  width: 250px;
+}
+
 .smallButton {
   width: 120px;
+}
+.bigButton {
+  height: 45px;
+  font-size: 25px;
 }
 
 .smallText li {
@@ -179,5 +215,18 @@ strong {
   }
   .profil-mainContainer > div {
     width: 80vw;
+  }
+  .vote {
+    gap: 50px;
+  }
+  .vote img {
+    width: 150px;
+  }
+  .vote button {
+    width: 150px;
+  }
+  .bigButton {
+    height: 30px;
+    font-size: 18px;
   }
 }

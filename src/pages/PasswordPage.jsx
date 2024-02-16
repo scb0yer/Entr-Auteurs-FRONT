@@ -50,7 +50,7 @@ export default function PasswordPage(props) {
   return (
     <main>
       <form>
-        <h2>Changer son mot de passe</h2>
+        <h2>Changer ton mot de passe</h2>
         <section className="infos">
           <div>
             <label className="invisible" htmlFor="token">
