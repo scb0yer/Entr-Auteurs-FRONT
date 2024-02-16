@@ -129,8 +129,17 @@ export default function AuthorPage(props) {
         }
       }
       if (careful || didntVote.length === 0) {
+        const { data1 } = await axios.post(
+          `https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/week`,
+          {},
+          {
+            headers: {
+              authorization: `Bearer ${props.token}`,
+            },
+          }
+        );
         if (week === (authors.nbActive - 1) / 2) {
-          const { data } = await axios.post(
+          const { data2 } = await axios.post(
             `https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/endSession`,
             {},
             {
@@ -143,15 +152,6 @@ export default function AuthorPage(props) {
           setCareful(false);
           alert("La session est terminée.");
         } else {
-          const { data } = await axios.post(
-            `https://site--entrauteurs-backend--dzk9mdcz57cb.code.run/admin/week`,
-            {},
-            {
-              headers: {
-                authorization: `Bearer ${props.token}`,
-              },
-            }
-          );
           setWeek(week + 1);
           setCareful(false);
           alert("La semaine a bien été mise à jour");
