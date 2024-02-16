@@ -128,7 +128,7 @@ export default function AuthorPage(props) {
     getAuthorsInactive();
   }, [updateInactive]);
 
-  return author ? (
+  return props.token ? (
     <main>
       <p>Sur ton profil, tu as accès à toutes tes informations.</p>
       {moreInfos ? (

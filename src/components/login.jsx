@@ -92,6 +92,7 @@ const Login = (props) => {
               onClick={(event) => {
                 event.preventDefault();
                 login();
+                console.log(props.token);
               }}
             />
           </div>
