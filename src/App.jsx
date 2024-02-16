@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import RulesPage from "./pages/Rulespage";
-import SubscriptionPage from "./pages/UpdateStoryPage";
+import SubscriptionPage from "./pages/SubscriptionPage";
 import ParticipantsPage from "./pages/ParticipantsPage";
 import AuthorPage from "./pages/AuthorPage";
 import Login from "./components/login";
