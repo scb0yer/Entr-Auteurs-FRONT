@@ -277,7 +277,7 @@ export default function AuthorPage(props) {
               {stories.map((story, index) => {
                 return (
                   <div key={index}>
-                    <a href={story.story_url}>
+                    <a href={story.story_url} target="_blank">
                       <img src={story.story_cover} alt={story.story_title} />
                     </a>
                     {!alreadyVoted && (
@@ -344,7 +344,7 @@ export default function AuthorPage(props) {
         </div>
         <div>
           <div className="profil-container">
-            <a href={author.story_details.story_url}>
+            <a href={author.story_details.story_url} target="_blank">
               <img
                 src={author.story_details.story_cover}
                 alt={author.story_details.story_title}
@@ -393,7 +393,10 @@ export default function AuthorPage(props) {
                     <div key={index}>
                       <div>{author.account.username}</div>
                       <div>
-                        <a href={author.story_details.story_url}>
+                        <a
+                          href={author.story_details.story_url}
+                          target="_blank"
+                        >
                           <img
                             className="miniature"
                             src={author.story_details.story_cover}
@@ -432,7 +435,10 @@ export default function AuthorPage(props) {
                     <div key={index}>
                       <div>{author.account.username}</div>
                       <div>
-                        <a href={author.story_details.story_url}>
+                        <a
+                          href={author.story_details.story_url}
+                          target="_blank"
+                        >
                           <img
                             className="miniature"
                             src={author.story_details.story_cover}
@@ -465,7 +471,10 @@ export default function AuthorPage(props) {
                     <div key={index}>
                       <div>{author.account.username}</div>
                       <div>
-                        <a href={author.story_details.story_url}>
+                        <a
+                          href={author.story_details.story_url}
+                          target="_blank"
+                        >
                           <img
                             className="miniature"
                             src={author.story_details.story_cover}
@@ -488,7 +497,10 @@ export default function AuthorPage(props) {
                     <div key={index}>
                       <div>{author.account.username}</div>
                       <div>
-                        <a href={author.story_details.story_url}>
+                        <a
+                          href={author.story_details.story_url}
+                          target="_blank"
+                        >
                           <img
                             className="miniature"
                             src={author.story_details.story_cover}

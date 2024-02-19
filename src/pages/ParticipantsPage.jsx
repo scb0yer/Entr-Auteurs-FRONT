@@ -40,7 +40,7 @@ export default function ParticipantsPage() {
               </div>
               <div>{author.story_title}</div>
               <div>
-                <a href={author.story_url}>
+                <a href={author.story_url} target="_blank">
                   <img src={author.story_cover} alt={author.story_title} />
                 </a>
               </div>

@@ -233,9 +233,10 @@ export default function SubscriptionPage(props) {
             couverture de ton livre, depuis ton compte wattpad. Le lien doit
             commencer par https://img.wattpad.com/cover/
           </p>
+          <br />
           <div>
             <label className="invisible" htmlFor="key">
-              Clé "secrète" pour s'inscrire :
+              Clé "secrète" pour s'inscrire (sans majuscule, ni guillemets) :
             </label>
             <input
               type="text"
