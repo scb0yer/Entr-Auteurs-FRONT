@@ -52,27 +52,31 @@ export default function PasswordPage(props) {
       <form>
         <h2>Changer ton mot de passe</h2>
         <section className="infos">
-          <div>
-            <label className="invisible" htmlFor="token">
-              Clé secrète :
-            </label>
-            <input
-              type="text"
-              className="input-form"
-              id="token"
-              name="token"
-              placeholder="Clé reçue par email"
-              value={token}
-              onChange={(event) => {
-                onChange(event, "token");
-              }}
-            />
-          </div>
-          <p className="smallText">
-            Si elle ne s'affiche pas automatiquement, tu peux nous la demander
-            en utilisant le formulaire de contact ou en nous envoyant un message
-            sur Discord.
-          </p>
+          {!props.token && (
+            <>
+              <div>
+                <label className="invisible" htmlFor="token">
+                  Clé secrète :
+                </label>
+                <input
+                  type="text"
+                  className="input-form"
+                  id="token"
+                  name="token"
+                  placeholder="Clé reçue par email"
+                  value={token}
+                  onChange={(event) => {
+                    onChange(event, "token");
+                  }}
+                />
+              </div>
+              <p className="smallText">
+                Demande ta clé secrète en remplissant le formulaire en bas de
+                page, en utilisant l'adresse-email avec laquelle tu t'es
+                inscrit(e).
+              </p>
+            </>
+          )}
           <div>
             <label className="invisible" htmlFor="newpassword">
               Nouveau mot de passe :

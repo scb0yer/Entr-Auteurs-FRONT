@@ -54,6 +54,16 @@ export default function SubscriptionPage(props) {
         );
       } else if (password.length < 8) {
         alert("Le mot de passe doit faire au moins 8 caractères");
+      } else if (
+        story_cover.slice(0, 30) !== "https://img.wattpad.com/cover/"
+      ) {
+        alert(
+          "Tu dois mettre l'adresse de l'image de ta couverture dans `Lien vers la couverture de ton image`. Tu peux la retrouver dans ton espace, en faisant un clic-droit sur ton image et ouvrir dans un nouvel onglet. Tu n'as plus qu'à copier l'adresse."
+        );
+      } else if (story_url.slice(0, 30) !== "https://www.wattpad.com/story/") {
+        alert(
+          "L'adresse de ton histoire doit commencer par `https://www.wattpad.com/story/`."
+        );
       } else {
         const role = "Auteur";
         const status = "Pending";
