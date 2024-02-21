@@ -27,6 +27,7 @@ export default function ParticipantsPage() {
   ) : (
     <main>
       <h2>Liste des participants inscrits pour la prochaine session.</h2>
+      <br />
       <p>
         Du 3 mars au 21 avril 2024 : inscriptions ouvertes jusqu'au 1er mars.
       </p>{" "}
