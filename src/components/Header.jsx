@@ -21,9 +21,9 @@ const Header = (props) => {
         <Link to="/reglement" className="invisible">
           Règlement
         </Link>
-        <Link to="/inscription" className="invisible">
+        {/* <Link to="/inscription" className="invisible">
           Inscription
-        </Link>
+        </Link> */}
         <Link to="/participants" className="invisible">
           Participants
         </Link>

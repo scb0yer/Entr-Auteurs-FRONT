@@ -29,8 +29,9 @@ export default function ParticipantsPage() {
       <h2>Liste des participants inscrits pour la prochaine session.</h2>
       <br />
       <p>
-        Du 3 mars au 21 avril 2024 : inscriptions ouvertes jusqu'au 1er mars.
-      </p>{" "}
+        Du 3 mars au 21 avril 2024 : inscriptions momentanément fermées pour la
+        prochaine session.
+      </p>
       <br />
       <div className="authorsContainer">
         {authorsRegistered.authors.map((author, index) => {

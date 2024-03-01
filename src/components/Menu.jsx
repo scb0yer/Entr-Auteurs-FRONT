@@ -28,7 +28,7 @@ export default function Menu(props) {
         </button>
         <button
           onClick={() => {
-            navigate("/inscription");
+            alert("Les inscriptions sont momentanéments fermées.");
             props.setMenuDisplay(false);
           }}
         >

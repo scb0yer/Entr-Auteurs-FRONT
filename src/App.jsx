@@ -37,10 +37,10 @@ function App() {
           element={<PasswordPage setToken={setToken} token={token} />}
         />
         <Route path="/reglement" element={<RulesPage />} />
-        <Route
+        {/* <Route
           path="/inscription"
           element={<SubscriptionPage setToken={setToken} />}
-        />
+        /> */}
         <Route
           path="/updateStory"
           element={<UpdateStoryPage token={token} />}
