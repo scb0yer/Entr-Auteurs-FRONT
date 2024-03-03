@@ -44,10 +44,7 @@ export default function HomePage() {
       </ul>
       <br />
       <br />
-      <strong>
-        Inscriptions ouvertes pour la prochaine session du 3 mars au 21 avril
-        2024, limitée à 15 participants.
-      </strong>
+      <strong>Prochaine session pour début mai.</strong>
     </main>
   );
 }
